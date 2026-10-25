@@ -1,0 +1,8 @@
+node_modules
+src
+tests
+scripts
+.git
+.github
+*.md
+tsconfig*.json

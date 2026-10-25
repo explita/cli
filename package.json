@@ -1,0 +1,51 @@
+{
+  "name": "@explita/cli",
+  "version": "0.1.0",
+  "description": "Explita Infra developer CLI",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "bin": {
+    "explita": "./dist/main-bin.js",
+    "eta": "./dist/eta-bin.js",
+    "eda": "./dist/eda-bin.js"
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "clean": "rimraf dist",
+    "prebuild": "node scripts/generate-version.js",
+    "build": "pnpm clean && tsup && tsc --emitDeclarationOnly",
+    "cli": "node dist/main-bin.js",
+    "test": "node --import tsx --test tests/**/*.test.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "docker:build": "pnpm build && docker build -t explita/cli:latest ."
+  },
+  "dependencies": {
+    "@explita/infra-protocol": "^0.1.0",
+    "ignore": "^7.0.12",
+    "tar": "^7.5.22"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.3",
+    "@types/tar": "^7.0.87",
+    "rimraf": "^6.0.1",
+    "tsup": "^8.5.1",
+    "tsx": "^4.20.0",
+    "typescript": "^7.0.2"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ]
+}
